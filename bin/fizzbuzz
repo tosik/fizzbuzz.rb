@@ -22,4 +22,10 @@ end
 
 engine = FizzBuzz::Engine.new
 presenter = FizzBuzz::Presenter.new(engine)
+
+begin
 presenter.print(Range.new(from, to))
+rescue ArgumentError => e
+  STDERR.puts "ERROR: Invalid argument: #{e.message}"
+  exit 1
+end
