@@ -22,4 +22,24 @@ class EngineTest < MiniTest::Unit::TestCase
     assert_equal generated[99992], "Fizz"
     assert_equal generated[99991], 99992
   end
+
+  def test_correct?
+    assert_equal @engine.generate(1..1), [1]
+    assert_equal @engine.generate(5..5), ["Buzz"]
+  end
+
+  def test_incorrect_arguments?
+    assert_raises(ArgumentError) { @engine.generate(0..0) }
+    assert_raises(ArgumentError) { @engine.generate(5..0) }
+    assert_raises(ArgumentError) { @engine.generate(1..0) }
+    assert_raises(ArgumentError) { @engine.generate(5..2) }
+  end
+
+  def test_range_validator
+    assert @engine.valid_range?(1..1000)
+    assert !@engine.valid_range?(0..1000)
+    assert !@engine.valid_range?(0..0)
+    assert !@engine.valid_range?(1..0)
+    assert !@engine.valid_range?(1000..500)
+  end
 end

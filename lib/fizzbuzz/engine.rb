@@ -15,7 +15,12 @@ class FizzBuzz::Engine
     end
   end
 
+  def valid_range?(range)
+    range.size != 0 && range.first >= 1
+  end
+
   def generate(range)
+    raise ArgumentError.new("Invalid range") unless valid_range?(range)
     range.map {|number|
       if number.fizz?
         "Fizz"
