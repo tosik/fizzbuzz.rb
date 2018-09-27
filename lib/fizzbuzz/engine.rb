@@ -1,6 +1,8 @@
 require 'fizzbuzz.rb'
 
 class FizzBuzz::Engine
+
+  # FIXME: It is Numeric type pollution .
   class ::Numeric
     def fizz?
       self % 3 == 0 && self % 5 != 0
