@@ -1,1 +1,25 @@
 #!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require 'fizzbuzz'
+require 'fizzbuzz/engine'
+require 'fizzbuzz/presenter'
+
+unless ARGV.size == 2
+  STDERR.puts "ERROR: Need at least 2 numeric arguments"
+  exit 1
+end
+
+begin
+  from = Integer(ARGV.shift)
+  to = Integer(ARGV.shift)
+rescue ArgumentError => e
+  STDERR.puts "ERROR: Cannot parse the argument"
+  exit 1
+end
+
+engine = FizzBuzz::Engine.new
+presenter = FizzBuzz::Presenter.new(engine)
+presenter.print(Range.new(from, to))
